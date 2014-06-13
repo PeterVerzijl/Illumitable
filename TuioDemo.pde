@@ -1,6 +1,6 @@
 // we need to import the TUIO library
 // and declare a TuioProcessing client variable
-// import TUIO.*;
+import TUIO.*;
 
 // Also import vector class from the java library
 import java.util.*;
@@ -47,7 +47,6 @@ void setup()
   screenRatio = (float)width / (float)height;
   noStroke();
   frameRate(60);
-  //noLoop();
   
   // Initiate grid
   grid = new Grid();
@@ -61,7 +60,7 @@ void setup()
   // we create an instance of the TuioProcessing client
   // since we add "this" class as an argument the TuioProcessing class expects
   // an implementation of the TUIO callback methods (see below)
-  // tuioClient  = new TuioProcessing(this);
+  tuioClient  = new TuioProcessing(this);
 }
 
 // within the draw method we retrieve a Vector (List) of TuioObject and TuioCursor (polling)
@@ -73,7 +72,7 @@ void draw()
   // Create a font for the cursor id's
   textFont(font, 18*scale_factor); 
 
-  // updatePoints();
+  updatePoints();
   
   drawPoints();
   
@@ -98,7 +97,6 @@ void mousePressed() {
   }
 }
 
-/*
 void updatePoints() {
   
   // Cursor and Object sizes
@@ -123,7 +121,7 @@ void updatePoints() {
     }
   }
 }
-*/
+
 void drawPoints() {
   
   for( int i = 0; i < grid.points.length; i++ ) {
@@ -134,8 +132,6 @@ void drawPoints() {
     }
   }
 }
-
-/*
 
 // these callback methods are called whenever a TUIO event occurs
 
@@ -185,4 +181,3 @@ void removeTuioCursor(TuioCursor tcur) {
 void refresh(TuioTime bundleTime) { 
   redraw();
 }
-*/
