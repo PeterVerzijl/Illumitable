@@ -72,7 +72,6 @@ public class Grid {
     
     float ringDeltaX = (width) / (measures * signatures);
     float ringDeltaY = (height) / (measures * signatures);
-    float noteDelta = ( 2 * PI ) / ( notes * instruments );
     
     // Draw the rings of the grid;
     for( int i = 0; i < measures*signatures; i ++ ) {
@@ -142,6 +141,20 @@ public class Grid {
     
     returnVector.set( points[idx].pos );
     return returnVector;
+  }
+  
+  void turnOnClosestPoint( PVector pos ) {
+    
+    float distance = PVector.dist(points[0].pos, pos);
+    int idx = 0;
+    for(int c = 1; c < points.length; c++){
+        float cdistance = PVector.dist(points[c].pos, pos);
+        if(cdistance < distance){
+            idx = c;
+            distance = cdistance;
+        }
+    }
+    points[idx].on = true;
   }
 }
 
