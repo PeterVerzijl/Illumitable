@@ -37,6 +37,7 @@ PFont font;
 Grid grid;
 float screenRatio;
 
+// Set this to true when relasing on the table
 boolean sketchFullScreen() {
   return false;
 }
@@ -52,7 +53,10 @@ void setup()
   // Initiate grid
   grid = new Grid();
   
+  // Font Creation
   font = createFont("Arial", 18);
+  
+  // Set cursor scale factors
   scale_factor = height/table_size;
   
   // Init midi
@@ -98,10 +102,9 @@ void mousePressed() {
   }
 }
 
+
 void updatePoints() {
   
-  // Cursor and Object sizes
-  float cur_size = cursor_size*scale_factor; // Grey dot
   // Getting cursors from tuio
   // Vector class implements list<> (see java docs)
   Vector tuioCursorList = tuioClient.getTuioCursors();
@@ -113,12 +116,9 @@ void updatePoints() {
       stroke(0, 0, 255);
       for (int j=0; j<pointList.size (); j++) {
         TuioPoint start_point = (TuioPoint)pointList.elementAt( j );
+        grid.turnOnClosestPoint( 
+          new PVector( start_point.getScreenX(width), start_point.getScreenY(height) ) );
       }
-      points.add( new Point( new PVector( 
-        tcur.getScreenX(width), tcur.getScreenY(height) ), 
-        cur_size ) );
-      text(""+ tcur.getCursorID(), tcur.getScreenX(width)-5, 
-        tcur.getScreenY(height)+5);
     }
   }
 }
