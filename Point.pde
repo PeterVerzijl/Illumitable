@@ -10,6 +10,9 @@ public class Point {
   
   boolean on = false;
   
+  // Accuracy of the collision
+  int accuracy = 3;
+  
   public Point( PVector pos, int instrument, int note ) {
     
     this.pos = pos;
@@ -35,12 +38,13 @@ public class Point {
   
   void collision() {
     
-    if( pos.x < grid.x*0.5 + width*0.5 && pos.y < grid.y*0.5 + height*0.5 && pos.x > -grid.x*0.5 + width*0.5 && 
-        pos.x > -grid.x*0.5 + width*0.5 && pos.y > -grid.y*0.5 + height*0.5 ) {
+     if ( ( pos.x > width*0.5 - grid.pulseX*0.5 && pos.x < width*0.5 + grid.pulseX*0.5 && pos.y > height*0.5 - grid.pulseY*0.5 && pos.y < height*0.5 + grid.pulseY*0.5 ) && 
+      !( pos.x > width*0.5 - grid.pulseX*0.5 + accuracy && pos.x < width*0.5 + grid.pulseX*0.5 - accuracy && pos.y > height*0.5 - grid.pulseY*0.5 + accuracy && pos.y < height*0.5 + grid.pulseY*0.5 - accuracy ) && on ) {
       if( on ) {
-        println("added to list");
+        // print for debug mode
+        // println("added to list");
         insturmentlist[ instrument-1 ].add( note );
-        println( insturmentlist );
+        // println( insturmentlist );
         on = false;
       }
     }
