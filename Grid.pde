@@ -11,6 +11,7 @@ public class Grid {
   // Pulse
   float x;
   float y;
+  int lastSignature = -1;
   
   int bpm = 120;
   
@@ -106,8 +107,10 @@ public class Grid {
     y = ( ( millis() - startTime ) * dPulseY ) % height;
     
     // Empty array
-    if( (int)(x*0.5) % (int)( width*0.5/( measures*signatures ) ) == 1 ){
-      
+    if( (int)(x*0.5) % (int)( width*0.5/( measures*signatures ) ) == 1 && 
+      (int)(x*0.5) / (int)( width*0.5/( measures*signatures ) ) != lastSignature ){
+      // Also check if this note hasn't been played before
+      lastSignature = (int)(x*0.5) / (int)( width*0.5/( measures*signatures ) );
       // Loop trough all arraylists of notes
       for( int i = 0; i < insturmentlist.length; i++ ) {
         // Send note array to midi_ix
@@ -115,7 +118,6 @@ public class Grid {
         // Empty note arraylist
         insturmentlist[i] = new ArrayList<Integer>();
       }
-      println( insturmentlist );
     }
     
     rectMode( CENTER );
