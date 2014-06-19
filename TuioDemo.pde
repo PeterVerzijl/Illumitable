@@ -6,7 +6,8 @@ import TUIO.*;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-//TuioProcessing tuioClient;
+// Setup points and tuio client object
+TuioProcessing tuioClient;
 List<Point> points = new CopyOnWriteArrayList<Point>();
 
 // MIDI STUFF
