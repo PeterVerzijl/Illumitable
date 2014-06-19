@@ -2,8 +2,6 @@ public class Point {
  
   PVector pos;
   
-  float size = 20;
-  
   int instrument, note;
     
   long startTime, stayDuration;
@@ -16,7 +14,6 @@ public class Point {
   public Point( PVector pos, int instrument, int note ) {
     
     this.pos = pos;
-    this.size = size;
     this.instrument = instrument;
     this.note = note;
     
@@ -26,8 +23,6 @@ public class Point {
     
   void draw() {
     
-    float delta = (float)255 / (float)stayDuration;
-    float alpha = 255 - ( millis() - startTime ) * delta;  
     pushMatrix();
       fill(255, 0, 0, 255); // alpha!
       noStroke();
